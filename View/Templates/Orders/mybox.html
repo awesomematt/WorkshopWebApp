@@ -1,2 +1,28 @@
-﻿<b>Zawartość twojego koszyka:</b></br>
-{{ shoppingbox.client_service_ordered }}
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Zawartość koszyka</title>
+</head>
+<body>
+<h1><b>Zawartość twojego koszyka:</b></h1></br>
+
+{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+
+<ul>
+    {% for content in box_content %}
+    <li>{{ content }}</li>
+    {% endfor %}
+</ul>
+
+<form action="{% url 'orders:finalize'%}" method="post">
+    {% csrf_token %}
+    {% if shopping_box %}
+    <input type="hidden" name="shopping_box" id="{{ shopping_box.id }}" value="{{ shopping_box.id }}"/></br>
+    <h3>Suma: {{shopping_box.sum_price}} zł</h3>
+    {% endif %}
+    <br/><br/>
+    <input type="submit" value="Finalizuj zamówienie"/>
+</form>
+</body>
+</html>

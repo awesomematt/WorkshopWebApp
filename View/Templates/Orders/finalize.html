@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizacja zamówienia</title>
+</head>
+<body>
+<h1><b>Proszę uzupełnić dane w celu zrealizowania pełnego zamówienia usług lakierniczych</b></h1></br>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'orders:summary'%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="shopping_box_id" id="{{ shopping_box_id }}" value="{{ shopping_box_id }}"/>
+    <label for="name">Imię: </label>
+    <input type="text" name="name" id="name"/><br/><br/>
+    <label for="surname">Nazwisko: </label>
+    <input type="text" name="surname" id="surname"/><br/><br/>
+    <label for="phone_number">Numer telefonu: </label>
+    <input type="text" name="phone_number" id="phone_number"/><br/><br/>
+    <label for="e-mail">Adres e-mail: </label>
+    <input type="text" name="e-mail" id="e-mail"/><br/><br/>
+    <label for="date">Data realizacji: </label>
+    <input type="date" name="date" id="date"/><br/><br/>
+    <input type="submit" value="Zapisz zamówienie"/>
+</form>
+</body>
+</html>

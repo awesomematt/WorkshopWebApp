@@ -5,7 +5,8 @@
     <title>Podsumowanie zamówienia</title>
 </head>
 <body>
-<h1><b>Podsumowanie złożonego zamówienia:</b></h1></br>
+<h1><b>Zamówienie zostało przyjęte!</b></h1></br>
+<h2><b>Podsumowanie złożonego zamówienia:</b></h2></br>
 <h3><b>Dane zamawiającego:</b></h3></br>
 <ul>
     {% for detail in user_details %}
@@ -20,6 +21,12 @@
     {% endfor %}
 </ul>
 </br>
-<h2><b>Suma do zapłaty: {{ order_price }} zł</b></h2>
+<h2><b>Suma do zapłaty: {{ order_price }} zł</b></h2></br>
+<form action="{% url 'orders:finalize'%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="data_edit" value="true"/>
+    <br/><br/>
+    <input type="submit" value="Edytuj dane zamówienia"/>
+</form>
 </body>
 </html>

@@ -11,7 +11,6 @@
 
 <form action="{% url 'orders:summary'%}" method="post">
     {% csrf_token %}
-    <input type="hidden" name="shopping_box_id" id="{{ shopping_box_id }}" value="{{ shopping_box_id }}"/>
     <label for="name">Imię: </label>
     <input type="text" name="name" id="name"/><br/><br/>
     <label for="surname">Nazwisko: </label>

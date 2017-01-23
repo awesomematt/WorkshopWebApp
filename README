@@ -9,6 +9,6 @@ This project was made in two weeks. Ended at the 23th of January, 2017.
 Project doesn't contain automatic setup file, like one from Django's
 documentation tutorial. All you have to do is to start a new project
 in Django environment and copy all data from the .zip file to the folder.
-It has open-source licence so feel free to use this project.
+It has open-source license so feel free to use this project.
 
 Regards, YellowMatt.

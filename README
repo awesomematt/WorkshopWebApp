@@ -1,0 +1,14 @@
+This is Workshop Web Application project.
+It was my first time with Django framework.
+It was also my first time with Python back-end, and first time with
+front-end development ever! So please, be merciful. I realize that
+this project may contain too many unforgiven "mistakes" or rather
+convention that doesn't follow the python's style guide.
+I have never coded in Python before.
+This project was made in two weeks. Ended at the 23th of January, 2017.
+Project doesn't contain automatic setup file, like one from Django's
+documentation tutorial. All you have to do is to start a new project
+in Django environment and copy all data from the .zip file to the folder.
+It has open-source licence so feel free to use this project.
+
+Regards, YellowMatt.

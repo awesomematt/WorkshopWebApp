@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Wybór usług lakierniczych</title>
+    {% load static %}
+    <link href="{% static 'orders/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'orders:index'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:mybox'%}">
+            <span class="active"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:finalize'%}">
+            <span class="active"><span class="valign"><span class="vertical">DANE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DANE</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:summary'%}">
+            <span class="active"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+        </a>
+    </div>
+
+    </br>
+    <h1><b>Formularz zamawiania usług lakierniczych w warsztacie</b></h1>
+
+    {% if message %}
+    <h2 id="error-m"><p><strong>{{ message }}</strong></p></h2>
+    {% endif %}
+
+    <div class="service-form-container">
+        <form action="{% url 'orders:mybox'%}" method="post">
+            {% csrf_token %}
+            <div class="b-image">
+                <div class="form-items">
+                    {% for service in service_list %}
+                    <input type="checkbox" name="service[]" id="service{{ forloop.counter }}" value="{{ service.id }}"/>
+                    <label for="service{{ forloop.counter }}">
+                        <div class="service-text" id="s-name">{{ service.service_name }}, koszt:</div>
+                        <div class="service-text" id="s-price">{{ service.service_price }}zł</div>
+                        </br>
+                    </label>
+                    {% endfor %}
+                    </br></br>
+                    <input type="submit" value="Dodaj do koszyka" class="btn" id="add-btn"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>

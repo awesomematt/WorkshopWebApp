@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8">
+    <title>Lokalizacja warsztatu</title>
+    {% load static %}
+    <link href="{% static 'home/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'home:services'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'home:localization'%}">
+            <span class="active"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+        </a>
+        <a class="link" href="javascript:void(0)" onClick="showInfo()">
+            <span class="active"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+        </a>
+    </div>
+    </br>
+    <h1>Lokalizacja warsztatu</h1>
+    <br><br>
+    <h3 id="statement">Nasz warsztat znajduje się przy ulicy Dunikowskiego 8 w Gliwicach</h3>
+    <br>
+    <div id="map"></div>
+    <br><br>
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="{% static 'home/javascript/map.js' %}"></script>
+<script src="{% static 'home/javascript/contact.js' %}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATqmuA6QPXObkC8GYgptfOGIWqZo77czU&callback=initMap">
+</script>
+</body>
+</html>

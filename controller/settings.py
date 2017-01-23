@@ -1,4 +1,4 @@
-# Project name: Workshop Web Application
+# Workshop Web Application Project
 # Authors: Mateusz Jachimczak & Dawid Pawłowski
 # Silesian Univeristy of Technology, Gliwice, Poland
 # GitHub: https://github.com/yellowmatt/WorkshopWebApp
@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'orders.apps.OrdersConfig',
     'django.contrib.admin',
     'django.contrib.auth',

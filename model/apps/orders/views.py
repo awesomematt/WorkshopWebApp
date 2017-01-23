@@ -3,11 +3,10 @@
 # Silesian Univeristy of Technology, Gliwice, Poland
 # GitHub: https://github.com/yellowmatt/WorkshopWebApp
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from .models import Service
 from .models import ShoppingBox
 from .models import Order
-from django.http import HttpResponse
 
 
 # Function which defines view for root of orders app
@@ -31,10 +30,21 @@ def shoppingBox(request):
         })
     elif 'shopping_box' in request.session:
         box_edit = request.session.get('box_edit')
-        if 'true' in box_edit:
+        if box_edit is not None and 'true' in box_edit:
             if 'order' in request.session:
                 request.session['box_edit'] = 'false'
-                return HttpResponse("Dokonano już zamówienia! Edycja koszyka nie jest już możliwa!")
+                return render(request, 'orders/mybox.html', {
+                    'message': "Dokonano już zamówienia! Edycja koszyka nie jest już możliwa!",
+                })
+            elif not selected_services:
+                request.session['box_edit'] = 'false'
+                shopping_box = ShoppingBox.objects.get(pk=request.session['shopping_box'])
+                ids = shopping_box.client_service_ordered
+                box_content = ShoppingBox.objects.show_content_of_shopping_box(ids)
+                context = {'box_content': box_content,
+                           'shopping_box': shopping_box,
+                           'message': "Nie wybrano żadnej usługi! Edycja koszyka anulowana! "}
+                return render(request, 'orders/mybox.html', context)
             else:
                 summary = ShoppingBox.objects.calculate_final_price(selected_services)
                 ShoppingBox.objects.update_box(request.session['shopping_box'], selected_services, summary)
@@ -69,11 +79,15 @@ def finalize(request):
             request.session['order_edit'] = 'true'
             return render(request, 'orders/finalize.html')
         else:
-            return HttpResponse("Dokonano już zamówienia!")
+            return render(request, 'orders/finalize.html', {
+                'message': "Dokonano już zamówienia!",
+            })
     elif 'shopping_box' in request.session:
         return render(request, 'orders/finalize.html')
     else:
-        return HttpResponse("Twój koszyk jest pusty! Proszę najpierw dodać usługi do koszyka w celu finalizacji!")
+        return render(request, 'orders/finalize.html', {
+            'message': "Twój koszyk jest pusty! Proszę najpierw dodać usługi do koszyka w celu finalizacji!",
+        })
 
 
 # Function which defines view for summary of orders app
@@ -85,7 +99,9 @@ def order_info(request):
     if 'shopping_box' in request.session:
         shopping_box = ShoppingBox.objects.get(pk=request.session['shopping_box'])
     else:
-        return HttpResponse("Twój koszyk jest pusty! Proszę najpierw dodać usługi do koszyka!")
+        return render(request, 'orders/summary.html', {
+            'message': "Twój koszyk jest pusty! Proszę najpierw dodać usługi do koszyka!",
+        })
     if 'order' in request.session and 'false' in order_edit:
         shopping_box = ShoppingBox.objects.get(pk=request.session['shopping_box'])
         order = Order.objects.get(pk=request.session['order'])
@@ -120,6 +136,6 @@ def order_info(request):
                 context = Order.objects.create_context(order, shopping_box)
                 return render(request, 'orders/summary.html', context)
             else:
-                return HttpResponse(
-                    "Nie wypełniono wymaganych pól w formularzu finalizacji zamówienia! Brakujące pola: %s"
-                    % list_of_missing_fields)
+                return render(request, 'orders/summary.html', {
+                    'message': "Nie wypełniono wymaganych pól w formularzu finalizacji zamówienia!",
+                })

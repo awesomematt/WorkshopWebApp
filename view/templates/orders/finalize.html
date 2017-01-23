@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Finalizacja zamówienia</title>
+    {% load static %}
+    <link href="{% static 'orders/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'orders:index'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:mybox'%}">
+            <span class="active"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:finalize'%}">
+            <span class="active"><span class="valign"><span class="vertical">DANE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DANE</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:summary'%}">
+            <span class="active"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+        </a>
+    </div>
+
+    </br>
+    <h1><b>Proszę uzupełnić dane w celu zrealizowania pełnego zamówienia usług lakierniczych</b></h1></br>
+
+    {% if message %}
+    <h2 id="error-m"><p><strong>{{ message }}</strong></p></h2>
+    {% else %}
+    </br>
+    <div class="finalize-form-container">
+        <form action="{% url 'orders:summary'%}" method="post">
+            {% csrf_token %}
+            <label for="name"><h3>Imię: </h3></label>
+            <input type="text" name="name" id="name" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" required/><br/><br/>
+            <label for="surname"><h3>Nazwisko: </h3></label>
+            <input type="text" name="surname" id="surname" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
+                   required/><br/><br/>
+            <label for="phone_number"><h3>Numer telefonu: </h3></label>
+            <input type="text" name="phone_number" id="phone_number" pattern="[0-9]{9,}" required/><br/><br/>
+            <label for="e-mail"><h3>Adres e-mail: </h3></label>
+            <input type="email" name="e-mail" id="e-mail" required/><br/><br/>
+            <label for="date"><h3>Data realizacji: </h3></label>
+            <input type="date" name="date" id="date" required/><br/><br/><br/>
+            <input type="submit" value="Zapisz zamówienie" class="btn" id="save-btn"/>
+        </form>
+    </div>
+    {% endif %}
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>

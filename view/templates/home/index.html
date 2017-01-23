@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Warsztat Lakierniczy</title>
+    {% load static %}
+    <link href="{% static 'home/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'home:services'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'home:localization'%}">
+            <span class="active"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+        </a>
+        <a class="link" href="javascript:void(0)" onClick="showInfo()">
+            <span class="active"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+        </a>
+    </div>
+
+    </br>
+    <h1>Warsztat Lakierniczy - Stanisław Kowalski</h1>
+
+    </br></br>
+    <h2 id="advice">Zadbaj o wygląd swojego samochodu, podaruj mu nowy, elegancki styl.</h2>
+    <h3 id="question">Posiadasz zarysowania na lakierze, bądź chcesz odnowić wygląd swojego starego samochodu?</h3>
+    <h3 id="statement">Skorzystaj z usług naszego warsztatu już teraz!</h3>
+    <br>
+    <div class="slideshow-container" style="max-width:500px" id="sliderBorder">
+        <div class="slide fade">
+            <img src="{% static 'home/images/1.jpg' %}" style="width:100%">
+            <div class="slider-text">Szeroki wachlarz usług</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/2.jpg' %}" style="width:100%">
+            <div class="slider-text">Profesjonalny sprzęt</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/3.jpg' %}" style="width:100%">
+            <div class="slider-text">Fachowa obsługa</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/4.jpg' %}" style="width:100%">
+            <div class="slider-text">Atrakcyjne ceny</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/5.jpg' %}" style="width:100%">
+            <div class="slider-text">Szybka realizacja zamówienia</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/6.jpg' %}" style="width:100%">
+            <div class="slider-text">Możliwość zakupu akcesoriów lakierniczych</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/7.jpg' %}" style="width:100%">
+            <div class="slider-text">Renowacja starego lakieru</div>
+        </div>
+        <div class="slide fade">
+            <img src="{% static 'home/images/8.jpg' %}" style="width:100%">
+            <div class="slider-text">Lakierowanie poszczególnych części pojazdu</div>
+        </div>
+    </div>
+    </br></br>
+    <h2>Nazwa projektu: Warsztat Lakierniczy</h2>
+    <h3 id="authors">Autorzy projektu: Mateusz Jachimczak & Dawid Pawłowski</h3>
+    </br>
+    <a href="https://github.com/yellowmatt/WorkshopWebApp" class="btn">Repozytorium: GitHub</a>
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="{% static 'home/javascript/slideshow.js' %}"></script>
+<script src="{% static 'home/javascript/contact.js' %}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Lista dostępnych usług</title>
+    {% load static %}
+    <link href="{% static 'home/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'home:services'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'home:localization'%}">
+            <span class="active"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DOJAZD</span></span></span>
+        </a>
+        <a class="link" href="javascript:void(0)" onClick="showInfo()">
+            <span class="active"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KONTAKT</span></span></span>
+        </a>
+    </div>
+    </br>
+    <h1>Spis dostępnych usług</h1>
+    </br>
+    <div class="services-container">
+        {% for service in service_list %}
+        <div class="service-name">{{ service.service_name }}</div>
+        <div class="service-price" id="price">Cena: {{ service.service_price }} zł</div>
+        {% endfor %}
+    </div>
+    </br>
+    <a href="{% url 'orders:index'%}" class="btn">Złóż zamówienie</a>
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="{% static 'home/javascript/contact.js' %}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>

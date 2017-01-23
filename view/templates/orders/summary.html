@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Podsumowanie zamówienia</title>
+    {% load static %}
+    <link href="{% static 'orders/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Montserrat Sans -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400, 700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <a class="menu" href="{% url 'home:index'%}"><i class="icon-align-justify"></i></a>
+        <a class="link" href="{% url 'orders:index'%}">
+            <span class="active"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">USŁUGI</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:mybox'%}">
+            <span class="active"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">KOSZYK</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:finalize'%}">
+            <span class="active"><span class="valign"><span class="vertical">DANE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">DANE</span></span></span>
+        </a>
+        <a class="link" href="{% url 'orders:summary'%}">
+            <span class="active"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">ZLECENIE</span></span></span>
+        </a>
+    </div>
+
+    </br>
+    {% if message %}
+    <h2 id="error-m"><p><strong>{{ message }}</strong></p></h2>
+    {% else %}
+    <h1><b>Zamówienie zostało przyjęte!</b></h1></br>
+    <h2><b>Podsumowanie złożonego zamówienia:</b></h2></br>
+    <div class="summary-container">
+        <div class="summary-data-container">
+            <h3 class="summary-header"><b>Dane zamawiającego:</b></h3></br>
+            <ul>
+                {% for detail in user_details %}
+                <li>{{ detail }}</li>
+                {% endfor %}
+            </ul>
+            </br>
+            <h3 class="summary-header"><b>Zamówione usługi lakiernicze:</b></h3></br>
+            <ul>
+                {% for detail in order_details %}
+                <li>{{ detail }}</li>
+                {% endfor %}
+            </ul>
+            </br>
+            <h3 class="summary-header"><b>Suma do zapłaty: {{ order_price }} zł</b></h3></br>
+            <form action="{% url 'orders:finalize'%}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="data_edit" value="true"/>
+                <br/><br/>
+                <input type="submit" value="Edytuj dane zamówienia" class="btn" id="edit-summary-btn"/>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<h4 id="footer">Politechnika Śląska, AEiI, INF, SSM, BDiS (2017)</h4>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>
